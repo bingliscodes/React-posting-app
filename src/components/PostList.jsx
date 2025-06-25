@@ -14,7 +14,6 @@ export default function PostList() {
         "Content-Type": "application/json",
       },
     });
-    setPosts((prevPosts) => [postData, ...prevPosts]);
   }
 
   return (
