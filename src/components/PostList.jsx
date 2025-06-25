@@ -5,24 +5,15 @@ import classes from "./PostList.module.css";
 
 export default function PostList() {
   const posts = useLoaderData();
-
-  function handleAddPost(postData) {
-    fetch("http://localhost:8080/posts", {
-      method: "POST",
-      body: JSON.stringify(postData),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-  }
-
+  console.log(posts);
   return (
     <>
       {posts.length > 0 && (
         <ul className={classes.posts}>
           {posts.map((post) => (
             <Post
-              key={post.content}
+              key={post.id}
+              id={post.id}
               content={post.content}
               author={post.author}
             />
