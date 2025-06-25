@@ -61,6 +61,7 @@ export default function PostList({ isPosting, handleHideModal }) {
           <p>Start adding some!</p>
         </div>
       )}
+
       {isFetching && (
         <div style={{ textAlign: "center", color: "white" }}>
           <p>Loading posts...</p>
