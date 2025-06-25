@@ -5,36 +5,28 @@ import NewPost from "./NewPost";
 import Modal from "./Modal";
 import classes from "./PostList.module.css";
 
-export default function PostList({
-  isPosting,
-  handleHideModal,
-  handleShowModal,
-}) {
-  const [enteredContent, setEnteredContent] = useState("");
-  const [enteredAuthor, setEnteredAuthor] = useState("");
+export default function PostList({ isPosting, handleHideModal }) {
+  const [posts, setPosts] = useState([]);
 
-  function handleChangeContent(e) {
-    setEnteredContent(e.target.value);
+  function handleAddPost(postData) {
+    setPosts((prevPosts) => [postData, ...prevPosts]);
   }
-
-  function handleChangeAuthor(e) {
-    setEnteredAuthor(e.target.value);
-  }
-
   return (
     <>
       {isPosting && (
         <Modal onClose={handleHideModal}>
-          <NewPost
-            onContentChange={handleChangeContent}
-            onAuthorChange={handleChangeAuthor}
-          />
+          <NewPost onCancel={handleHideModal} onAddPost={handleAddPost} />
         </Modal>
       )}
 
       <ul className={classes.posts}>
-        <Post author={enteredAuthor} content={enteredContent} />
-        <Post author="Cannoli" content="Mreowwww" />
+        {posts.map((post) => (
+          <Post
+            key={post.content}
+            content={post.content}
+            author={post.author}
+          />
+        ))}
       </ul>
     </>
   );
